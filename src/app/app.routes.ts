@@ -15,7 +15,7 @@ export const ROUTER= [
         component: AboutComponent
     },
       {
-            path:'restaurantes/:id',
+            path:'restaurants/:id',
             component: RestaurantDetailComponent ,
             children:[
             {path:'', redirectTo:'menu',pathMatch:'full'},
@@ -24,7 +24,7 @@ export const ROUTER= [
         ] 
         }, 
     {
-        path:'restaurantes',
+        path:'restaurants',
         component: RestaurantsComponent
     }
 ]

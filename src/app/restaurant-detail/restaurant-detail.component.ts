@@ -15,6 +15,8 @@ export class RestaurantDetailComponent implements OnInit {
   restaurante:Restaurant
   ngOnInit() {
     this.restService.restaurantById(this.route.snapshot.params['id']).subscribe(data => this.restaurante = data)
+    this.restService.restaurantById(this.route.snapshot.params['id']).subscribe(data => console.log('RETORNANDO ' + data)
+    )
   }
 
 }
