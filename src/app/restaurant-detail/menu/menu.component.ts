@@ -17,8 +17,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.menu = this.restService.menuOfrestaurants(this.router.parent.snapshot.params['id'])
    
-    
-    
+      
   }
 
 }
