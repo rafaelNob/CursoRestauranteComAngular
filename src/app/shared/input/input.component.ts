@@ -24,7 +24,7 @@ export class InputComponent implements OnInit, AfterContentInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {  
   }
   /**
    * criado com a implementação  AfterContentInit
