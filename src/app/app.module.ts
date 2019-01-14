@@ -24,6 +24,7 @@ import { OrderComponent } from './order/order.component';
 import { InputComponent } from './shared/input/input.component';
 import { RadioComponent } from './shared/radio/radio.component';
 import { OrderItemsComponent } from './order/order-items/order-items.component';
+import { OrderService } from './order/order.service';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { OrderItemsComponent } from './order/order-items/order-items.component';
     FormsModule,
     RouterModule.forRoot(ROUTER)
   ],
-  providers: [RestaurantService,ShoppingCartService ,{provide: LOCALE_ID, useValue:'pt-BR'}],
+  providers: [RestaurantService,ShoppingCartService,OrderService ,{provide: LOCALE_ID, useValue:'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

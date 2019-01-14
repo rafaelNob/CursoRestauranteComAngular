@@ -10,7 +10,7 @@ export class OrderItemsComponent implements OnInit {
 
 @Output() increaseQty = new EventEmitter<CartItem>()
 @Output() decreaseQty = new EventEmitter<CartItem>()
-@Output() remove = new EventEmitter<CartItem>()
+@Output()      remove = new EventEmitter<CartItem>()
   constructor() { }
 
   ngOnInit() {
