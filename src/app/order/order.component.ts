@@ -9,6 +9,8 @@ import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+    delivery: number = 8
+
   paymentOptions:RadioOption[] =[
     { 
     label: 'Dinheiro',
@@ -28,9 +30,12 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
   }
+  itemsValue(): number{
+    return this.ordService.itemsValue()
+  }
 
   cartItems():CartItem[]{
-    console.log("CHAMOU CAR ITEMS");
+
     
     return this.ordService.cartItems()
   }
