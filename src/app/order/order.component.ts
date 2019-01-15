@@ -4,6 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
 import { Order ,OrderItem} from './order.model';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+     /* codigo para formBuilder */
+       orderForm: FormGroup
+
     delivery: number = 8
 
   paymentOptions:RadioOption[] =[
@@ -28,9 +32,19 @@ export class OrderComponent implements OnInit {
     }
 ]
 
-  constructor(private ordService:OrderService, private router:Router) { }
+  constructor(private ordService:OrderService, private router:Router , private fb:FormBuilder) { }
 
   ngOnInit() {
+    this.orderForm = this.fb.group({
+      name: this.fb.control(''),
+      email: this.fb.control(''),
+      emailConfirmation: this.fb.control(''),
+      address: this.fb.control(''),
+      number: this.fb.control(''),
+      optionalAddress: this.fb.control(''),
+      paymentOption: this.fb.control('')
+    })
+
   }
   itemsValue(): number{
     return this.ordService.itemsValue()
