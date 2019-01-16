@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
 import { Order ,OrderItem} from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
@@ -16,6 +16,13 @@ export class OrderComponent implements OnInit {
        orderForm: FormGroup
 
     delivery: number = 8
+
+    email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    number = /^[0-9]*$/;
+
+    emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+  numberPattern = /^[0-9]*$/
 
   paymentOptions:RadioOption[] =[
     { 
@@ -32,20 +39,62 @@ export class OrderComponent implements OnInit {
     }
 ]
 
-  constructor(private ordService:OrderService, private router:Router , private fb:FormBuilder) { }
+  constructor(private ordService:OrderService, private router:Router , private formBuilder:FormBuilder) { }
 
-  ngOnInit() {
-    this.orderForm = this.fb.group({
-      name: this.fb.control(''),
-      email: this.fb.control(''),
-      emailConfirmation: this.fb.control(''),
-      address: this.fb.control(''),
-      number: this.fb.control(''),
-      optionalAddress: this.fb.control(''),
-      paymentOption: this.fb.control('')
-    })
+    ngOnInit() {
+    this.orderForm = this.formBuilder.group({
+      name: this.formBuilder.control('' ,[Validators.required, Validators.minLength(5)]),
+      email: this.formBuilder.control('',[Validators.required,Validators.pattern(this.emailPattern)]),
+      emailConfirmation: this.formBuilder.control('',[Validators.required,Validators.pattern(this.emailPattern)]),
+      address: this.formBuilder.control('',[Validators.required,Validators.minLength(5)]),
+      number: this.formBuilder.control('',[Validators.required,Validators.pattern(this.number)]),
+      optionalAddress: this.formBuilder.control(''),
+      paymentOption: this.formBuilder.control('',[Validators.required])
 
+    },{validator: OrderComponent.equalsTo})
+
+  } 
+ 
+  
+  /* ngOnInit() {
+    this.orderForm = this.formBuilder.group({
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
+      optionalAddress: this.formBuilder.control(''),
+      paymentOption: this.formBuilder.control('', [Validators.required])
+
+    }, {validator: OrderComponent.equalsTo})
+  } */
+
+  static equalsTo(group:AbstractControl):{[key:string]:boolean}{
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+
+    if(!email || !emailConfirmation){
+      return undefined
+    }
+    if(email.value !== emailConfirmation.value){
+      return {emailsNotMatch:true}
+    }
+    return undefined
+    
   }
+
+  /* static equalsTo(group: AbstractControl): {[key:string]: boolean} {
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+    if(!email || !emailConfirmation){
+      return undefined
+    }
+    if(email.value !== emailConfirmation.value){
+      return {emailsNotMatch:true}
+    }
+    return undefined
+  } */
+
   itemsValue(): number{
     return this.ordService.itemsValue()
   }
