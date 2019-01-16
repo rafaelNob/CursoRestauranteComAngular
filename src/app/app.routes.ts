@@ -1,5 +1,5 @@
 import {HomeComponent} from './home/home.component'
-import { AboutComponent } from './about/about.component';
+
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
@@ -14,7 +14,7 @@ export const ROUTER= [
     },
     {
         path:'about',
-        component: AboutComponent
+       loadChildren:'app/about/about/about.module#AboutModule'
     },
       {
             path:'restaurants/:id',
