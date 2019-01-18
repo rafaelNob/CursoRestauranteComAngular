@@ -8,3 +8,5 @@ import { OrderService } from 'app/order/order.service';
   providers:[RestaurantService,ShoppingCartService,OrderService]
 })
 export class CoreModule { }
+
+/* obs: uma opção diferente para separar os providers */
