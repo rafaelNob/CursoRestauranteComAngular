@@ -12,16 +12,14 @@ import { HomeComponent } from './home/home.component'
 import { ROUTER} from './app.routes';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component'
-import { RestaurantService } from './restaurants/restaurants.service';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
-import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.serv';
-import { OrderService } from './order/order.service';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core/core.module';
 
 
 
@@ -43,9 +41,10 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     HttpModule,
     SharedModule,
+    CoreModule,
     RouterModule.forRoot(ROUTER)
   ],
-  providers: [RestaurantService,ShoppingCartService,OrderService ,{provide: LOCALE_ID, useValue:'pt-BR'}],
+  providers: [{provide: LOCALE_ID, useValue:'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
