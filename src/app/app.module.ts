@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, PreloadingStrategy, PreloadAllModules } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 
 
@@ -42,7 +42,7 @@ import { SharedModule } from './shared/shared.module';
     HttpModule,
     SharedModule,
     SharedModule.forRoot(),
-    RouterModule.forRoot(ROUTER)
+    RouterModule.forRoot(ROUTER, {preloadingStrategy:PreloadAllModules})
   ],
   providers: [{provide: LOCALE_ID, useValue:'pt-BR'}],
   bootstrap: [AppComponent]
