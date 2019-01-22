@@ -6,6 +6,7 @@ import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import{}from 'app/order/order.module'
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const ROUTER= [
     {
@@ -36,6 +37,10 @@ export const ROUTER= [
     {
         path:'order-summary',
         component: OrderSummaryComponent
+    },
+    {
+        path:'**',
+        component: NotFoundComponent
     }
 ]
 
