@@ -8,6 +8,7 @@ import { RestaurantService } from 'app/restaurants/restaurants.service';
 import { ShoppingCartService } from 'app/restaurant-detail/shopping-cart/shopping-cart.serv';
 import { OrderService } from 'app/order/order.service';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
+import { NotificationService } from './messages/notification.service';
 
 
 
@@ -22,7 +23,7 @@ export class SharedModule {
 
         return{
             ngModule:SharedModule,
-            providers:[RestaurantService,ShoppingCartService,OrderService]
+            providers:[RestaurantService,ShoppingCartService,OrderService,NotificationService]
             
         }
     }
