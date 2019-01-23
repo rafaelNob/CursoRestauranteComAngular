@@ -15,8 +15,10 @@ export class RestaurantService{
 
     constructor(private http:Http){}
 
-    restaurants():Observable <Restaurant[]>{
-        return this.http.get(`${MEAT_API}/restaurants`)
+    restaurants(search?: string):Observable <Restaurant[]>{
+      /*   parametro genérico (q) refina busca por nome, categoria e etc
+ */
+        return this.http.get(`${MEAT_API}/restaurants`,{params:{q:search}})
         .map(response => response.json())
         .catch(ErrorHandler.handlerError)
     }
