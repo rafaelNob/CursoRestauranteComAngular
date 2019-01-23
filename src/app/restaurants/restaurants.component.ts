@@ -47,10 +47,10 @@ export class RestaurantsComponent implements OnInit {
                 this.searchControl.valueChanges // cada plavra digitada ValueChanges pega a digitação
                     .debounceTime(500) // manda msg se a diferença entre 2 eventos for maior que o tempo informado
                     .distinctUntilChanged() // evento que esperao os 500ms e se for igual ao ultimo
-                    .switchMap(searchTerm => //controla varias requisições e não sobscreve as mesmas
+                    .switchMap(searchTerm => 
                       this.restService
-                        .restaurants(searchTerm)
-                        .catch(error=>Observable.from([])))
+                        .restaurants(searchTerm) //controla varias requisições e não sobscreve as mesmas
+                        .catch(error=>Observable.from([]))) //é usado para criar uma string apartir de um array
                     .subscribe(restaurants => this.restaurants = restaurants)
             
                 this.restService.restaurants()
