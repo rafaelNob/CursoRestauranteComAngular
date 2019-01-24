@@ -20,16 +20,16 @@ import'rxjs/add/operator/switchMap'
   templateUrl: './restaurants.component.html',
   styleUrls: ['./restaurants.component.css'],
   animations:[
-    trigger('toogleSearch',[
+    trigger('toggleSearch',[
       state('hidden',style({opacity:0,"max-height":"0px"})),
       state('visible',style({opacity:1,"max-height":"70px" ,"margin-top":"20px"})),
-      transition("* => *" , animate("250ms 0s ease-in-out "))
+      transition("* => *" , animate("250ms 0s ease-in-out"))
     ])
   ]
 })
 export class RestaurantsComponent implements OnInit {
 
-  searBarState='hidden'
+  searchBarState='hidden'
   restaurants: Restaurant[]
   searchForm:FormGroup
   searchControl:FormControl
@@ -43,7 +43,8 @@ export class RestaurantsComponent implements OnInit {
                 this.searchForm = this.fb.group({
                   searchControl: this.searchControl
                 })
-            
+                  console.log("Pegando " +  this.searchControl.valueChanges);
+                  
                 this.searchControl.valueChanges // cada plavra digitada ValueChanges pega a digitação
                     .debounceTime(500) // manda msg se a diferença entre 2 eventos for maior que o tempo informado
                     .distinctUntilChanged() // evento que esperao os 500ms e se for igual ao ultimo
@@ -61,7 +62,7 @@ export class RestaurantsComponent implements OnInit {
   
   toggleSearch(){
       state('visible',style({opacity:1,"max-height":"70px"})),
-    this.searBarState = this.searBarState === 'hidden'?'visible':'hidden'
+    this.searchBarState = this.searchBarState === 'hidden'?'visible':'hidden'
   }
 
 }

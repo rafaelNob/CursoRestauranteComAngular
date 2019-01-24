@@ -3,7 +3,8 @@
                  public number:number,
                  public optionalAddress,
                  public paymentOption:string,
-                 public orderItem:OrderItem[] = []
+                 public orderItem:OrderItem[] = [],
+                 public id?: string
                  ){}
 
 }
