@@ -3,6 +3,8 @@ exports.__esModule = true;
 var jsonServer = require("json-server"); //modulo que ele esta importando
 var fs = require("fs"); //capaz de ler arquivos do disco
 var https = require("https");
+//importação da autenticação do usuario
+var auth_1 = require("./auth");
 var server = jsonServer.create(); //faz uma tipagem de Expressa para poder trazer metodos e tratamentos de erros
 var router = jsonServer.router('db.json');
 var middlewares = jsonServer.defaults();
@@ -11,6 +13,8 @@ server.use(middlewares);
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser);
+//configurando rota de login
+server.post('/login', (auth_1.handleAuthentication));
 // Use default router
 server.use(router);
 //obtendo referencia ao certificado e a chave

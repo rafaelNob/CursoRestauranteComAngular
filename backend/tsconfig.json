@@ -1,7 +1,7 @@
 {
     "compileOnSave": true, //indicativo para compilar o arquivo de ts para js
     "compilerOptions": { //indica o diretorio de saida
-        "outDir": "dist"
+    "outDir": "dist"
 
     }
 }
