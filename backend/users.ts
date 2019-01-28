@@ -5,6 +5,8 @@ export class User{
         ){}
 
         matches(another:User):boolean{
+            console.log("Pegado o User " + another);
+            
            return another !== undefined && another.email === this.email && another.password === this.password     
         }
 }

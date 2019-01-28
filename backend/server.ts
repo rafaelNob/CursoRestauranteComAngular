@@ -4,6 +4,7 @@ import {Express} from 'express'
 import * as fs from 'fs' //capaz de ler arquivos do disco
 import * as https from 'https' 
 
+
 //importação da autenticação do usuario
 import {handleAuthentication} from './auth'
 
@@ -19,7 +20,7 @@ server.use(middlewares)
 server.use(jsonServer.bodyParser)
 
 //configurando rota de login
-server.post('/login',(handleAuthentication))
+server.post('/login', (handleAuthentication))
 
 // Use default router
 server.use(router)

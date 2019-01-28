@@ -7,6 +7,7 @@ var User = /** @class */ (function () {
         this.password = password;
     }
     User.prototype.matches = function (another) {
+        console.log("Pegado o User " + another);
         return another !== undefined && another.email === this.email && another.password === this.password;
     };
     return User;
