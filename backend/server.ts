@@ -8,6 +8,8 @@ import * as https from 'https'
 //importação da autenticação do usuario
 import {handleAuthentication} from './auth'
 
+import{handleAuthorization} from './authz'
+
 const server:Express = jsonServer.create() //faz uma tipagem de Expressa para poder trazer metodos e tratamentos de erros
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
@@ -21,6 +23,8 @@ server.use(jsonServer.bodyParser)
 
 //configurando rota de login
 server.post('/login', (handleAuthentication))
+//configuração do token usando o Use para servir para todos os protocolos get post etc
+server.use('/orders',handleAuthorization)
 
 // Use default router
 server.use(router)
@@ -32,7 +36,7 @@ const options ={
 }
 
 https.createServer(options,server) 
-.listen(3002, () => {
+.listen(3001, () => {
   console.log('JSON Server is running on https://localhost:3001') //criando o servidor
 })
 

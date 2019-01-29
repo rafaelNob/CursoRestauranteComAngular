@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import{ users,User} from './users'
 
+import{ apiConfig} from './api-config'
+
 //biblioteca token jwt
 import * as jwt from   'jsonwebtoken'
 //codigo que processa o post para o login
@@ -18,7 +20,7 @@ export const handleAuthentication = (req: Request, resp: Response) => {
             sub: dbUser.email,
             iss: 'meat-api'
             
-        },'meat-api-password')
+        },apiConfig.secret)
 
         resp.json({name: dbUser.name,
         email: dbUser.email,acessToken:token})
