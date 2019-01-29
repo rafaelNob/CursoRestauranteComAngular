@@ -5,13 +5,17 @@ import { Order } from "./order.model";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 /* import { Http, RequestOptions,Headers } from "@angular/http"; */
-import{ HttpClient} from '@angular/common/http'
+import{ HttpClient, HttpHeaders} from '@angular/common/http'
 import { MEAT_API } from "app/app.api";
+import { LoginService } from "app/security/login/login.service";
 
 
 @Injectable()
 export class OrderService{
-    constructor(private shopCartServ:ShoppingCartService, private http:HttpClient){}
+    constructor(private shopCartServ:ShoppingCartService,
+                private http:HttpClient,
+                private logSrv:LoginService
+                ){}
 
     cartItems():CartItem[]{
         return this.shopCartServ.items
@@ -33,8 +37,18 @@ export class OrderService{
         return this.shopCartServ.total()
     }
     checkOrder(order:Order):Observable<string>{
-       
-        return this.http.post<Order>(`${MEAT_API}/orders`, JSON.stringify(order))
+        //carrega o acessToken que recebe do login
+       let headers = new HttpHeaders()
+        
+       //se o usuario estiver logado
+       if(this.logSrv.isLoggedIn()){
+        //passa a autorização no header
+        console.log(`PEGANDO ACESS TOKEN ${this.logSrv.user.acessToken}` );
+        
+        headers = headers.set('Authorization',`Bearer ${this.logSrv.user.acessToken}`)
+       }
+
+        return this.http.post<Order>(`${MEAT_API}/orders`,order,{headers:headers})
         .map(order => order.id)
     }
 

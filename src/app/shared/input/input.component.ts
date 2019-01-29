@@ -16,6 +16,7 @@ export class InputComponent implements OnInit, AfterContentInit {
    */
   @Input() label: string
   @Input() errorMessage: string
+  @Input() showTip: boolean =true
 
   /**
    * @ContentChild(NgModel) esta pegando a e injetando na referencia
