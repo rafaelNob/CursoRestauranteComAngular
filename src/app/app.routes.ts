@@ -8,6 +8,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import{}from 'app/order/order.module'
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './security/login/login.component';
+import { LoggedInGuard } from './security/loggedin.guard';
 
 export const ROUTER= [
     {
@@ -37,7 +38,8 @@ export const ROUTER= [
     },
     {
         path:'order',
-        loadChildren:'app/order/order.module#OrderModule'
+        loadChildren:'app/order/order.module#OrderModule',
+        canload:[LoggedInGuard]
     },
     {
         path:'order-summary',
